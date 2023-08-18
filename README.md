@@ -1,34 +1,59 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Color Swatches: Akkio Frontend Technical Assessment
 
-## Getting Started
+A dynamic grid of HSL color swatches built using the [color api](https://www.thecolorapi.com/). This application allows users to input values for saturation (S) and lightness (L) to render named hues corresponding to the given S and L values.
 
-First, run the development server:
+## Features
+
+- User can input specific values for saturation (S) and lightness (L).
+- Renders all named hues from the color API based on user input.
+- Displays color, color name, and RGB value for each swatch.
+- Designed responsively to utilize the full width of the window.
+
+## Running the Project Locally
+
+1. Clone the repository:
+
+   ```bash
+   git clone https://github.com/[YOUR_USERNAME]/color-swatch.git
+   ```
+
+2. Navigate to the project directory:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
+cd color-swatch
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+3. Install dependencies (assuming you are using npm):
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+npm install
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+4. Build the application:
 
-## Learn More
+```bash
+npm run build
+```
 
-To learn more about Next.js, take a look at the following resources:
+5. Run the application:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```console
+npm run start
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+The application should open in your default web browser. If not, navigate to http://localhost:3000/.
 
-## Deploy on Vercel
+## Design Choices
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+During the development of this application, primary considerations were given to efficiency and user experience. To efficiently determine the distinct named colors, I utilized a color dictionary to cache any named colors that had previously been fetched. For an enhanced user experience, colors are not all rendered simultaneously; they're loaded using a lazy-load approach, rendering more as the user scrolls.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+API calls are initiated when either the user scrolls to the bottom of the page or submits a valid form. For improved API call efficiency, I fetch hue values in increments of 5, reducing redundant calls. To provide user feedback during data retrieval, a skeleton component is displayed while the API fetches results.
+
+One of the challenges faced during development was figuring out what qualifies as a valid color name. I had to decide whether the app should store the color if it matches a specific shade or if it should store the closest named color. Based on the provided example image, I concluded that storing the closest named color is the more suitable approach. Implementing a caching system using a dictionary to filter out already added colors proved beneficial for fetching colors efficiently.
+
+## Stack
+
+- React
+- Next.js
+- Tailwind
+- Shadcn (UI)
