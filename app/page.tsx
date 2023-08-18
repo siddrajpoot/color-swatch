@@ -9,6 +9,7 @@ import { HUES_VALUE, HUE_SPACING, PAGE_SIZE } from "@/lib/constants"
 import { getColors } from "@/lib/utils"
 import { UniqueColor } from "@/lib/types"
 import { InputForm } from "@/components/InputForm"
+import { Metadata } from "next"
 
 export default function Home() {
   const [shouldFetch, setShouldFetch] = useState(true)
